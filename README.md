@@ -2,11 +2,19 @@
 
 Node Typescript Braintree Integration
 
-## Start The application in Development Mode
+
+## Start The Frontend Application in Development Mode
+
+- Clone the Application `git clone https://github.com/santoshshinde2012/braintree-react-typescript.git`
+- Install the dependencies `npm install`
+- Start the application `npm start`
+
+## Start The Backend Application in Development Mode
 
 - Clone the Application `git clone https://github.com/santoshshinde2012/node-braintree-integration.git`
 - Install the dependencies `npm install`
 - Start the application `npm start`
+
 
 ## Start The application in Production Mode
 
