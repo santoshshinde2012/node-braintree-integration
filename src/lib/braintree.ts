@@ -14,7 +14,7 @@ export default class BraintreeWrapper {
 
     constructor() {
         // get the braintree key gateway config from environment, which we set in global environment objecr
-        const env: KeyGatewayConfig = environment.braintree
+        const env: KeyGatewayConfig = environment.braintree;
 
         // creates a gateway instance using 
         this.gateway = new braintree.BraintreeGateway(env);
@@ -22,19 +22,14 @@ export default class BraintreeWrapper {
 
     // generate the client token
     public async generateToken(): Promise < string > {
-        try {
-            const result: ValidatedResponse < ClientToken > = await this.gateway.clientToken.generate({});
-            const { clientToken } = result;
-            return clientToken;
-        } catch (err) {
-            throw err;
-        }
+        const result : ValidatedResponse < ClientToken > = await this.gateway.clientToken.generate({});
+        const { clientToken } = result;
+        return clientToken;
     }
 
     // make transaction
-    public async transaction(request: TransactionRequest): Promise < any > {
-        try {
-            const result: ValidatedResponse < Transaction > = await this.gateway.transaction.sale(request)
+    public async transaction(request: TransactionRequest): Promise < ITransactionResponse > {
+            const result: ValidatedResponse < Transaction > = await this.gateway.transaction.sale(request);
 
             // extract transaction response keys from result
             const { 
@@ -65,9 +60,6 @@ export default class BraintreeWrapper {
             };
 
             return response;
-        } catch (err) {
-            throw err;
-        }
     }
 
 

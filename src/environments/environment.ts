@@ -1,10 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import braintree from 'braintree';
 import { config as configDotenv } from 'dotenv';
 
 import { EnvironmentFile, Environments } from './environment.constant';
 import { IBraintreeEnvironment, IEnvironment } from './environment.interface';
-import braintree from 'braintree';
 
 class Environment implements IEnvironment {
 
@@ -97,15 +97,19 @@ class Environment implements IEnvironment {
      * @returns braintreeEnv
      */
     private setBraintreeEnvironment(): IBraintreeEnvironment {
-      let braintreeEnv: IBraintreeEnvironment = {
+      const braintreeEnv: IBraintreeEnvironment = {
         environment: braintree.Environment.Sandbox,
         merchantId: process.env.BRAINTREE_MERCHANT_ID,
         privateKey: process.env.BRAINTREE_PRIVATE_KEY,
         publicKey: process.env.BRAINTREE_PUBLIC_KEY,
       };
-      braintreeEnv.environment = this.isProductionEnvironment() ?  
-        braintree.Environment.Production : 
-          this.isStagingEnvironment() ? braintree.Environment.Qa : braintree.Environment.Sandbox;
+      if(this.isProductionEnvironment()) {
+        braintreeEnv.environment = braintree.Environment.Production;
+      } else if (this.isStagingEnvironment() ) {
+        braintreeEnv.environment =  braintree.Environment.Qa;
+      } else {
+        braintreeEnv.environment =  braintree.Environment.Sandbox;
+      }
     
       return braintreeEnv;
     }

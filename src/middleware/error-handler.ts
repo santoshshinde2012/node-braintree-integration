@@ -37,7 +37,10 @@ const addErrorHandler = (
     if(environment.applyEncryption) {
       body = encrypt(JSON.stringify(body), environment.secretKey);
     }
-    console.log(body)
+    /* eslint-disable no-console */
+    console.log(body);
+    /* eslint-enable no-console */
+    
     res.status(status).json(body);
   }
   next();
