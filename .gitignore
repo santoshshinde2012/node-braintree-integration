@@ -11,4 +11,6 @@ logs/
 # don't check in  env files
 .env.prod
 .env.staging
+.env.test
+.env.local
 **/.DS_Store

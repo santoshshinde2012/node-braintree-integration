@@ -1,7 +1,17 @@
+
+
+interface IBraintreeEnvironment {
+    environment: braintree.Environment,
+    merchantId: string,
+    publicKey: string,
+    privateKey: string
+}
+
 interface IEnvironment {
     port: number;
     secretKey: string;
     applyEncryption: boolean;
+    braintree: IBraintreeEnvironment;
     getCurrentEnvironment(): string;
     setEnvironment(env: string): void;
     isProductionEnvironment(): boolean;
@@ -10,4 +20,6 @@ interface IEnvironment {
     isStagingEnvironment(): boolean;
 }
 
-export default IEnvironment;
+
+
+export { IEnvironment, IBraintreeEnvironment } ;
